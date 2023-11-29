@@ -25,6 +25,7 @@ void* add_count(void* t){
 }
 void* watch_count(void* t){
     int tid = (int) t;
+    
     pthread_mutex_lock(&count_mutex);
     if (count < COUNT_LIMIT){
         pthread_cond_wait(&count_cv, &count_mutex);
@@ -43,9 +44,9 @@ int main(int argc, char* argv[]){
 
     pthread_attr_init(&attr);
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-    pthread_create(&threads[0], &attr, watch_count, (void*) tid1);
-    pthread_create(&threads[1], &attr, watch_count, (void*) tid2);
-    pthread_create(&threads[2], &attr, watch_count, (void*) tid3);
+    pthread_create(&threads[0], &attr, watch_count, (void *) tid1);
+    pthread_create(&threads[1], &attr, add_count, (void *) tid2);
+    pthread_create(&threads[2], &attr, add_count, (void *) tid3);
 
     for (int i = 0; i < 3; ++i){
         pthread_join(threads[i],0);
