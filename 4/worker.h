@@ -19,8 +19,8 @@ class Worker {
     public:
     Worker(){ running=true; ready=false; ulock=unique_lock<mutex>(mtx);}
     void run();
-    void stop();
-    void setRequest(AbstractRequest* request) {this->request; ready=true;}
+    void stop() {running = false; }
+    void setRequest(AbstractRequest* request) {this->request = request; ready=true;}
     void getCondition(condition_variable* &cv);
   
 };
