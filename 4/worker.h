@@ -17,7 +17,7 @@ class Worker {
     bool ready;
 
     public:
-    Worker(){ running=true; ready=false; ulock=unique_lock(mtx);}
+    Worker(){ running=true; ready=false; ulock=unique_lock<mutex>(mtx);}
     void run();
     void stop();
     void setRequest(AbstractRequest* request) {this->request; ready=true;}

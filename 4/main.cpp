@@ -25,7 +25,7 @@ void logFnc(string text){
 int main(){
     signal(SIGINT, &sigint_handler);
     Dispatcher::init(10);
-    cout << "Initialised.\n"
+    cout << "Initialised.\n";
     int cycles = 0;
     Request* rq = 0;
     while (!signal_caught && cycles < 50){
@@ -39,6 +39,6 @@ int main(){
     this_thread::sleep_for(chrono::seconds(5));
 
     Dispatcher::stop();
-    cout << "Clean-up done.\n"
+    cout << "Clean-up done.\n";
     return 0;
 }
